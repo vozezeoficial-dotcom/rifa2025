@@ -89,12 +89,12 @@
     padding:10px;
     margin-top:12px;
     border-radius:10px;
-    font-size:13px;
+    font-size:14px;
   }
 
   textarea{
     width:100%;
-    min-height:80px;
+    min-height:55px;
     border-radius:10px;
     border:1px solid #333;
     background:#000;
@@ -106,13 +106,13 @@
 
   .copy-btn{
     margin-top:8px;
-    padding:8px;
+    padding:10px;
     width:100%;
     border-radius:10px;
     border:none;
     cursor:pointer;
     background:#ffd27f;
-    font-size:14px;
+    font-size:15px;
     color:#4b2a00;
     font-weight:bold;
   }
@@ -128,115 +128,4 @@
     font-size:18px;
     font-weight:bold;
     cursor:pointer;
-    display:none;
-  }
-
-</style>
-</head>
-
-<body>
-
-<h1>Rifa de Natal da Vó Zezé 🎄🌿</h1>
-
-<!-- Botão superior -->
-<button id="btnWhatsTop" class="top-btn">
-  Enviar comprovante no WhatsApp da Vó
-</button>
-
-<div class="desc-box">
-  Participe da rifa solidária da Vó Zezé!<br>
-  São <strong>10 cestas especiais</strong> de ervas, chás, incensos e mimos energéticos.<br>
-  Cada número custa <strong>R$ 10,00</strong>.<br>
-  Escolha seu número, faça o PIX e envie o comprovante para a Vó. ✨
-</div>
-
-<h2>Escolha seu número da sorte ✨</h2>
-
-<div id="grid" class="grid"></div>
-
-<div id="msg"></div>
-
-<!-- Área do PIX -->
-<div id="pixArea">
-  <strong>PIX (copia e cola):</strong><br><br>
-  <textarea id="pixCode" readonly></textarea>
-
-  <button class="copy-btn" onclick="copiarPIX()">📋 Copiar PIX</button>
-
-  <!-- Botão Whats abaixo do PIX -->
-  <button id="btnWhatsBottom" class="whats-bottom">
-    Enviar comprovante no WhatsApp da Vó
-  </button>
-</div>
-
-<script>
-  var TOTAL = 5000;
-  var WHATS = "5548991248366";
-
-  // PIX em uma linha só
-  var PIX = "00020101021226780014BR.GOV.BCB.PIX013609579f86-adaa-4260-a417-bf5bfaaf343d02116Pagamento vozeze520400005303986540510.005802BR5925ALEXANDRE BERMAN DOS PASS6010PORTO BELO62290525QRCC4cwhzisEv1T9PeOCy0T2G6304676E";
-
-  var grid = document.getElementById("grid");
-  var msg = document.getElementById("msg");
-  var pixArea = document.getElementById("pixArea");
-  var pixCode = document.getElementById("pixCode");
-  var btnWhatsTop = document.getElementById("btnWhatsTop");
-  var btnWhatsBottom = document.getElementById("btnWhatsBottom");
-
-  function formatNumero(n){
-    var s = "0000" + n;
-    return s.slice(-4);
-  }
-
-  // Gera os 5000 números
-  for (var i = 1; i <= TOTAL; i++) {
-    var num = formatNumero(i);
-    var btn = document.createElement("button");
-    btn.textContent = num;
-    btn.className = "num-btn";
-    btn.setAttribute("data-num", num);
-
-    btn.onclick = function(){
-      var numero = this.getAttribute("data-num");
-      selecionarNumero(numero, this);
-    };
-
-    grid.appendChild(btn);
-  }
-
-  function selecionarNumero(numero, botao){
-    msg.innerHTML = "Você escolheu o número <strong>" + numero + "</strong>. Faça o PIX e envie o comprovante.";
-
-    botao.classList.add("disabled");
-    botao.disabled = true;
-
-    pixArea.style.display = "block";
-    pixCode.value = PIX;
-
-    btnWhatsTop.style.display = "block";
-    btnWhatsBottom.style.display = "block";
-
-    var textoWhats = 
-      "Escolhi o número " + numero +
-      " na rifa da Vó Zezé. Estou enviando o comprovante do PIX agora.";
-
-    btnWhatsTop.onclick = function(){
-      window.open("https://wa.me/" + WHATS + "?text=" + encodeURIComponent(textoWhats), "_blank");
-    };
-    btnWhatsBottom.onclick = function(){
-      window.open("https://wa.me/" + WHATS + "?text=" + encodeURIComponent(textoWhats), "_blank");
-    };
-
-    // rolar até o PIX
-    pixArea.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function copiarPIX(){
-    navigator.clipboard.writeText(PIX)
-      .then(()=>alert("PIX copiado!"))
-      .catch(()=>alert("Copie manualmente."));
-  }
-</script>
-
-</body>
-</html>
+    display:none
